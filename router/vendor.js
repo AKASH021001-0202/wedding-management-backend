@@ -44,6 +44,15 @@ vendorRouter.get('/', async (req, res) => {
     res.status(500).json({ message: 'Error fetching vendors', error: error.message });
   }
 });
+vendorRouter.get('/all', async (req, res) => {
+  try {
+    const vendors = await Vendormodel.find()
+    res.json(vendors);
+  } catch (error) {
+    console.error('Error fetching vendors:', error);
+    res.status(500).json({ message: 'Error fetching vendors', error: error.message });
+  }
+});
 
 // GET /vendors/:id - Fetch vendor by ID
 vendorRouter.get('/:id', async (req, res) => {
